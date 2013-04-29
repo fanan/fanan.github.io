@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Data mining with R notes: 1</title>
+  
+    <meta name="description" content="&#34;&#34;">
+  
+    <meta name="author" content="An Fan">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/twitter/stylesheets/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css" type="text/css" rel="stylesheet" media="all">
+ 
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  <!--<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>-->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">One and Only</a>
+          <ul class="nav">
+            
+              
+
+
+  <li><a href="/archive">Archive</a></li>
+
+
+            
+              
+
+
+  <li><a href="/tags">Tags</a></li>
+
+
+            
+              
+
+
+  <li><a href="/categories">Categories</a></li>
+
+
+            
+              
+
+
+  <li><a href="/pages">Pages</a></li>
+
+
+            
+              
+
+
+  <li><a href="/about">About Me</a></li>
+
+
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        <div class="page-header">
+  <h1>Data mining with R notes: 1 </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p>{% include JB/setup %}</p>
+
+<p>##Introduction</p>
+
+<p>I am now reading <code>Data Mining With R</code>, and I am taking notes. The original plot-system of the book is <a href="http://lattice.r-forge.r-project.org">lattice</a>. However, I am going to replace it with <a href="http://ggplot2.org">ggplot2</a>.</p>
+
+<p>##Predicting Algae Blooms</p>
+
+<p>It is a classic prediction problem. 200 training data are given.</p>
+
+<p>###Loading Data</p>
+
+<p>{% highlight s %}
+library(ggplot2)
+library(DMwR)
+head(algae)
+{% endhighlight %}</p>
+
+<p>the results are shown below</p>
+
+<p>{% highlight s %}
+season  size  speed mxPH mnO2     Cl    NO3     NH4    oPO4     PO4 Chla   a1   a2   a3  a4   a5   a6  a7
+1 winter small medium 8.00  9.8 60.800  6.238 578.000 105.000 170.000 50.0  0.0  0.0  0.0 0.0 34.2  8.3 0.0
+2 spring small medium 8.35  8.0 57.750  1.288 370.000 428.750 558.750  1.3  1.4  7.6  4.8 1.9  6.7  0.0 2.1
+3 autumn small medium 8.10 11.4 40.020  5.330 346.667 125.667 187.057 15.6  3.3 53.6  1.9 0.0  0.0  0.0 9.7
+4 spring small medium 8.07  4.8 77.364  2.302  98.182  61.182 138.700  1.4  3.1 41.0 18.9 0.0  1.4  0.0 1.4
+5 autumn small medium 8.06  9.0 55.350 10.416 233.700  58.222  97.580 10.5  9.2  2.9  7.5 0.0  7.5  4.1 1.0
+6 winter small   high 8.25 13.1 65.750  9.248 430.000  18.250  56.667 28.4 15.1 14.6  1.4 0.0 22.5 12.6 2.9
+{% endhighlight %}</p>
+
+<p>###Visualization</p>
+
+<p><code>ggplot2</code> is a handful plotting tool. The only disadvantage is that it support 2D plotting only.</p>
+
+<p>Show the boxplot of <code>size</code> and <code>a1</code>:
+{% highlight s %}
+qplot(size, a1, geom=&lsquo;boxplot&rsquo;)
+{% endhighlight %}</p>
+
+<p>Show the histogram of <code>mxPH</code>:
+{% highlight s %}
+qplot(mxPH, data=algae, geom=&lsquo;histogram&rsquo;, binwidth=0.4)
+{% endhighlight %}</p>
+
+<p>###Handle unknown values</p>
+
+<p>Usually, there 4 ways to handle the unknowns.</p>
+
+<p>1.Remove the cases withs unkowns.
+2.Fill in the unknown values by exploring the correlations between variables.
+3.Fill in the unknown values by exploring the similarity between cases.
+4.Use tools that are able to handle these values.</p>
+
+<p>####remove unknown values
+the <code>complete.cases()</code> function will tell whether a case is complete or not.
+{% highlight s %}
+complete.cases(algae) #a boolean vector
+algae.complete = algae[complete.cases(algae),] #because algae is a data frame
+nrow(algae.complete) #184
+{% endhighlight %}</p>
+
+<p>Or, we can simply omit the NAs with one line:
+{% highlight s %}
+algae.complete = na.omit(algae)
+{% endhighlight %}</p>
+
+<p>Sometimes, it is useful to find out how many NAs there are in one row. R supports anonymous function, so we can do
+{% highlight s %}
+apply(algae, 1, function(x) sum(is.na(x)))
+{% endhighlight %}</p>
+
+<p>####fill in the unknowns with the most frequent values
+Mean, Median, and Mode are 3 ways to fill in the blanks. We should decide which one to use by the shape of its distribution. For example. the normal distribution is symetric and the obseravtions are clustered around the mean, thus, the Mean statistic is a good choice. For skewed distribution, or there are some obvious outliers in the sample, the mean may be incorrect. So the median may be a better choice.</p>
+
+<p>Caculate the mean of the mxPH, removing the unknowns.
+{% highlight s %}
+mxPH.mean = mean(algae$mxPH, na.rm = TRUE)
+{% endhighlight %}</p>
+
+<p>Fill the blanks:
+{% highlight s %}
+algae[is.na(algae$mxPH), &ldquo;mxPH&rdquo;] = mean(algae$mxPH, na.rm = TRUE)
+algae[is.na(algae$Chla), &ldquo;Chla&rdquo;] = median(algae$Chla, na.rm = TRUE)
+{% endhighlight %}</p>
+
+<p>####fill in the unknowns by exploring correlations
+To obtain the variables correlation we can issue the command:
+{% highlight s %}
+cor(algae[, 4:18], use = &ldquo;complete.obs&rdquo;)
+{% endhighlight %}</p>
+
+<p>This gives us a numerical matrix which may be difficult to get the correlation whose absolute value is close to 1. So
+{% highlight s %}
+symnum(cor(algae[,4:18], use = &ldquo;complete.obs&rdquo;))
+{% endhighlight %}</p>
+
+<p>In our data, the correlations are in most cases irrelevant. However, there are two exceptions: between variables NH4 and NO3, and between PO4 and oPO4. These two latter variables are strongly correlated (above 0.9). The correlation between NH4 and NO3 is less evident (0.72) and thus it is risky to take advantage of it to fill in the unknowns.</p>
+
+<p>We could do a linear regression.</p>
+
+<p>{% highlight s %}
+lm(PO4 ~ oPO4, data=algae)
+{% endhighlight %}</p>
+
+<p>We get the coefficients, <code>a=1.293, b=42.897</code>, so fill in the blank:
+{% highlight s %}
+algae[28, &ldquo;PO4&rdquo;] = 42.897 + 1.293 * algae[28, &ldquo;oPO4&rdquo;]
+{% endhighlight %}</p>
+
+<p>####filling in the unknown values by exploring similarities between cases</p>
+
+<p>Instead of exploring the correlation between the columns (variables) of a dataset, we can try to use the similarities between the rows (observations) to fill in the unknown values.</p>
+
+<p>First, we define a metric, the Euclidean norm is mostly used. Then, we find the <code>k</code> most nearest point to the point which has NA. The weight is caculated by the Gaussion kernel function <code>w(d) = e^{-d}</code>. For nominal variables, the distance is 1 if they are not equal, otherwise it is set to 0. These distances are caculated after normalizing the numeric values.</p>
+
+<p>{% highlight s %}
+knnImputation = function (data, k = 10, scale = T, meth = &ldquo;weighAvg&rdquo;, distData = NULL)
+{
+    n &lt;- nrow(data)
+    if (!is.null(distData)) {
+        distInit &lt;- n + 1
+        data &lt;- rbind(data, distData)
+    }
+    else distInit &lt;- 1
+    N &lt;- nrow(data)
+    ncol &lt;- ncol(data)
+    nomAttrs &lt;- rep(F, ncol)
+    for (i in seq(ncol)) nomAttrs[i] &lt;- is.factor(data[, i])
+    nomAttrs &lt;- which(nomAttrs)
+    hasNom &lt;- length(nomAttrs)
+    contAttrs &lt;- setdiff(seq(ncol), nomAttrs)
+    dm &lt;- data
+    if (scale)
+        dm[, contAttrs] &lt;- scale(dm[, contAttrs])
+    if (hasNom)
+        for (i in nomAttrs) dm[, i] &lt;- as.integer(dm[, i])
+    dm &lt;- as.matrix(dm)
+    nas &lt;- which(!complete.cases(dm))
+    if (!is.null(distData))
+        tgt.nas &lt;- nas[nas &lt;= n]
+    else tgt.nas &lt;- nas
+    if (length(tgt.nas) == 0)
+        warning(&ldquo;No case has missing values. Stopping as there is nothing to do.&rdquo;)
+    xcomplete &lt;- dm[setdiff(distInit:N, nas), ]
+    if (nrow(xcomplete) &lt; k)
+        stop(&ldquo;Not sufficient complete cases for computing neighbors.&rdquo;)
+    for (i in tgt.nas) {
+        tgtAs &lt;- which(is.na(dm[i, ]))
+        dist &lt;- scale(xcomplete, dm[i, ], FALSE)
+        xnom &lt;- setdiff(nomAttrs, tgtAs)
+        if (length(xnom))
+            dist[, xnom] &lt;- ifelse(dist[, xnom] &gt; 0, 1, dist[,
+                xnom])
+        dist &lt;- dist[, -tgtAs]
+        dist &lt;- sqrt(drop(dist^2 %*% rep(1, ncol(dist))))
+        ks &lt;- order(dist)[seq(k)]
+        for (j in tgtAs) if (meth == &ldquo;median&rdquo;)
+            data[i, j] &lt;- centralValue(data[setdiff(distInit:N,
+                nas), j][ks])
+        else data[i, j] &lt;- centralValue(data[setdiff(distInit:N,
+            nas), j][ks], exp(-dist[ks]))
+    }
+    data[1:n, ]
+}</p>
+
+<p>clean.algae = knnImputation(algae, k=10)
+{% endhighlight %}</p>
+
+<p>###linear model
+{% highlight s %}
+lm.a1 = lm(a1 ~ ., data = clean.algae[, 1:12])
+summary(lm.a1)
+plot(lm.a1)
+anova(lm.a1)
+final.lm.a1 = step(lm.a1)
+{% endhighlight %}</p>
+
+<p>For nominal variables, R will create auxiliaray variables. For example, the <code>season</code> variable, R will create <code>seasonspring</code>, <code>seasonsummer</code> and <code>seasonwinter</code>, if all these variables are 0, then the value of season is <code>autumn</code>.</p>
+
+<p>With the result, we could see the R-square is only 0.32, which indicates that the linear model does not fit the data well.</p>
+
+<p>###regression tree
+Use a regression tree model.
+{% highlight s %}
+library(rpart)
+rt.a1 = rpart(a1 ~ ., data=algae[,1:12])
+plot(rt.a1)
+text(rt.a1)
+summary(rt.a1)
+{% endhighlight %}</p>
+
+<p>###evaluation of model and selection
+todo</p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+        <ul>
+          
+            <li class="prev"><a href="/default/yum-tips/" title="yum tips">&larr; Previous</a></li>
+          
+          
+
+            <li><a href="/archive">Archive</a></li>
+
+          
+            <li class="next"><a href="/default/R-plot-1/" title="R plot 1">Next &rarr;</a></li>
+          
+          
+        </ul>
+      </ul>
+    </div>
+    <hr>
+    
+<div id="disqus_thread"></div>
+<script>
+    var disqus_developer = 1;
+    var disqus_shortname = 'jekyllbootstrap'; // required: replace example with your forum shortname
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>2012-12-27</span></div>
+    <br>
+    <h4>Categories</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/categories/#default-ref">default <span>5</span></a>
+</li>
+    
+    </ul>
+    <br>
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/tags/#R-ref">R <span>2</span></a>
+</li>
+    
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <footer>
+        <p>&copy; An Fan 2013 
+          with help from <a href="http://github.com/wendal/gor" target="_blank" title="Gor -- Fast Blog">Gor</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+		  and Idea from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+<script src="http://cdnjs.cloudflare.com/ajax/libs/prettify/188.0.0/prettify.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+</script>
+
+    
+<script>
+    var _gaq=[['_setAccount','UA-123-12'],['_trackPageview']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+  </body>
+</html>
