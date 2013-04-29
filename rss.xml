@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+  <channel>
+    <title>One and Only</title>
+    <link>http://fanan.github.io</link>
+    <pubDate>2013-04-29 10:03:18 +0800</pubDate>
+    <item>
+      <title>Hello</title>
+      <link>http://fanan.github.io/Diary/Hello/</link>
+      <pubDate>2013-04-29 12:00:00 +0800</pubDate>
+      <description>&lt;p&gt;开始使用&lt;code&gt;Gor&lt;/code&gt;来渲染&lt;code&gt;markdown&lt;/code&gt;文件。&lt;/p&gt;
+</description>
+    </item>
+  </channel>
+</rss>
