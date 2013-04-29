@@ -24,6 +24,7 @@
     <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
     <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
   -->
+  <!--<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>-->
   </head>
 
   <body>
@@ -85,9 +86,40 @@
 <div class="row">
   <div class="span12">
     
-
 <h2>最近更新</h2>
 
+
+<div class="post">
+  <h3 class="title"><a href="/go/go-lang-test/">go-lang-test</a> <span class="date">2013-04-29</span></h3>
+
+  <h1>golang-snippet iconv</h1>
+
+<p>To use <code>libiconv</code>, we could use the <code>mahonia</code> package from <a href="https://code.google.com/p/mahonia">https://code.google.com/p/mahonia</a>.</p>
+
+<h2><a style="display: block;" name="install" href="#install"></a>install</h2>
+
+<pre><code>go get -u code.google.com/p/mahonia
+</code></pre>
+
+<h2><a style="display: block;" name="example" href="#example"></a>example</h2>
+
+<p>go
+package main</p>
+
+<p>import (
+    &ldquo;bufio&rdquo;
+    &ldquo;fmt&rdquo;
+    &ldquo;io&rdquo;
+    &ldquo;log&rdquo;
+    &ldquo;mahonia&rdquo;
+    &ldquo;os&rdquo;
+)</p>
+
+
+  <div class="more">
+    <a href="/go/go-lang-test/" class="btn">read more..</a>
+  </div>
+</div>
 
 <div class="post">
   <h3 class="title"><a href="/Diary/Hello/">Hello</a> <span class="date">2013-04-29</span></h3>
@@ -99,6 +131,129 @@
     <a href="/Diary/Hello/" class="btn">read more..</a>
   </div>
 </div>
+
+<div class="post">
+  <h3 class="title"><a href="/default/vim-delete-lines/">vim delete lines</a> <span class="date">2013-04-23</span></h3>
+
+  <p>在<code>vim</code>中，删除某些特定pattern的行十分简单：</p>
+
+<pre><code>:g/regexp/d
+</code></pre>
+
+<p>类似的可以保留包含特定pattern的行</p>
+
+<pre><code>:v/regexp/d
+</code></pre>
+
+
+  <div class="more">
+    <a href="/default/vim-delete-lines/" class="btn">read more..</a>
+  </div>
+</div>
+
+<div class="post">
+  <h3 class="title"><a href="/default/launchctl%E4%BD%BF%E7%94%A8/">launchctl使用</a> <span class="date">2013-02-28</span></h3>
+
+  <p>{% include JB/setup %}</p>
+
+<p><code>launchctl</code>是Mac OS X中用来控制守护进程的一个工具。配合plist，可以达到启动、停止某服务的作用。</p>
+
+<p>假设有一个com.example.foobar.plist文件，启动</p>
+
+<p>{% highlight sh %}
+launchctl load com.example.foobar.plist
+launchctl unload com.example.foobar.plist
+{% endhighlight %}</p>
+
+<p>比较遗憾的是没有reload功能。更加简单的理解就是linux下面的/etc/init.d/下面的内容。</p>
+
+
+  <div class="more">
+    <a href="/default/launchctl%E4%BD%BF%E7%94%A8/" class="btn">read more..</a>
+  </div>
+</div>
+
+<div class="post">
+  <h3 class="title"><a href="/default/yum-tips/">yum tips</a> <span class="date">2013-02-18</span></h3>
+
+  <p>As we all know, Redhat Linux and its variants (CentOS, Fedora) use <code>yum</code> as their default package manager. However, we cannot list the content of one rpm package only with the <code>yum</code> command.</p>
+
+<p>One approach to solve the problem is download the rpm file and use</p>
+
+<pre><code class="bash">rpm -qlp rpm-file-name
+</code></pre>
+
+<p>The disadvantage and inconveniece is obvious.</p>
+
+<p>The best way is</p>
+
+<pre><code class="bash">yum install yum-utils
+repoquery -lq package-name
+</code></pre>
+
+
+  <div class="more">
+    <a href="/default/yum-tips/" class="btn">read more..</a>
+  </div>
+</div>
+
+<div class="post">
+  <h3 class="title"><a href="/default/Data-mining-with-R-notes--1/">Data mining with R notes: 1</a> <span class="date">2012-12-27</span></h3>
+
+  <p>{% include JB/setup %}</p>
+
+<p>##Introduction</p>
+
+<p>I am now reading <code>Data Mining With R</code>, and I am taking notes. The original plot-system of the book is <a href="http://lattice.r-forge.r-project.org">lattice</a>. However, I am going to replace it with <a href="http://ggplot2.org">ggplot2</a>.</p>
+
+<p>##Predicting Algae Blooms</p>
+
+<p>It is a classic prediction problem. 200 training data are given.</p>
+
+<p>###Loading Data</p>
+
+<p>{% highlight s %}
+library(ggplot2)
+library(DMwR)
+head(algae)
+{% endhighlight %}</p>
+
+<p>the results are shown below</p>
+
+
+  <div class="more">
+    <a href="/default/Data-mining-with-R-notes--1/" class="btn">read more..</a>
+  </div>
+</div>
+
+<div class="post">
+  <h3 class="title"><a href="/default/R-plot-1/">R plot 1</a> <span class="date">2012-12-14</span></h3>
+
+  <p>绘图功能是<code>R</code>的杀手锏。和一些<strong><em>下拉框</em></strong>式的统计软件不同，R的绘图需要自己动手。</p>
+
+<p>网络上关于R的绘图的文章已有成千上万，在此将自己日常工作要用到的一些绘图功能做一记录。</p>
+
+<p>首先是最简单的在<code>quartz</code>或者<code>X11</code>下作图。</p>
+
+<pre><code class="r">x &lt;- c(1:10, 10:1)
+plot(x, type = &quot;p&quot;)
+</code></pre>
+
+<p>将图保存到pdf文件中。（保存为jpeg、png等格式的方法类似）</p>
+
+<pre><code class="r">pdf(&quot;pdf_filename.pdf&quot;)
+x &lt;- c(1:10, 10:1)
+plot(x, type = &quot;n&quot;)
+lines(1:length(x), x)
+dev.off()
+</code></pre>
+
+
+  <div class="more">
+    <a href="/default/R-plot-1/" class="btn">read more..</a>
+  </div>
+</div>
+
 
   </div>
 </div>

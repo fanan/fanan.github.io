@@ -3,12 +3,373 @@
   <channel>
     <title>One and Only</title>
     <link>http://fanan.github.io</link>
-    <pubDate>2013-04-29 10:03:18 +0800</pubDate>
+    <pubDate>2013-04-29 12:57:11 +0800</pubDate>
+    <item>
+      <title>go-lang-test</title>
+      <link>http://fanan.github.io/go/go-lang-test/</link>
+      <pubDate>2013-04-29 12:00:00 +0800</pubDate>
+      <description>&lt;h1&gt;golang-snippet iconv&lt;/h1&gt;
+
+&lt;p&gt;To use &lt;code&gt;libiconv&lt;/code&gt;, we could use the &lt;code&gt;mahonia&lt;/code&gt; package from &lt;a href=&#34;https://code.google.com/p/mahonia&#34;&gt;https://code.google.com/p/mahonia&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2&gt;&lt;a style=&#34;display: block;&#34; name=&#34;install&#34; href=&#34;#install&#34;&gt;&lt;/a&gt;install&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;go get -u code.google.com/p/mahonia
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2&gt;&lt;a style=&#34;display: block;&#34; name=&#34;example&#34; href=&#34;#example&#34;&gt;&lt;/a&gt;example&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;go&#34;&gt;package main
+
+import (
+    &amp;quot;bufio&amp;quot;
+    &amp;quot;fmt&amp;quot;
+    &amp;quot;io&amp;quot;
+    &amp;quot;log&amp;quot;
+    &amp;quot;mahonia&amp;quot;
+    &amp;quot;os&amp;quot;
+)
+
+var filename = &amp;quot;/Users/fatman/workspace/scripts/cup/acl/test_data/cvsmain2/CVSROOT/modules&amp;quot;
+
+func checkError(err interface{}) {
+    if err != nil {
+        log.Fatal(err)
+    }
+}
+
+func main() {
+    f, err := os.Open(filename)
+    checkError(err)
+    defer f.Close()
+    decoder := mahonia.NewDecoder(&amp;quot;gb18030&amp;quot;)
+    r := bufio.NewReader(decoder.NewReader(f))
+    //p := make([]byte, 1&amp;lt;&amp;lt;16)
+    //n, err1 := r.Read(p)
+    //checkError(err1)
+    //fmt.Println(n)
+    //fmt.Println(string(p))
+    for {
+        s, err := r.ReadString(&#39;\n&#39;)
+        if err != nil {
+            if err == io.EOF {
+                break
+            } else {
+                log.Fatal(err)
+            }
+        }
+        fmt.Print(s)
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Quite easy, isn&amp;rsquo;t it?&lt;/p&gt;
+</description>
+    </item>
     <item>
       <title>Hello</title>
       <link>http://fanan.github.io/Diary/Hello/</link>
       <pubDate>2013-04-29 12:00:00 +0800</pubDate>
       <description>&lt;p&gt;开始使用&lt;code&gt;Gor&lt;/code&gt;来渲染&lt;code&gt;markdown&lt;/code&gt;文件。&lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>vim delete lines</title>
+      <link>http://fanan.github.io/default/vim-delete-lines/</link>
+      <pubDate>2013-04-23 12:00:00 +0800</pubDate>
+      <description>&lt;p&gt;在&lt;code&gt;vim&lt;/code&gt;中，删除某些特定pattern的行十分简单：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;:g/regexp/d
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;类似的可以保留包含特定pattern的行&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;:v/regexp/d
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    <item>
+      <title>launchctl使用</title>
+      <link>http://fanan.github.io/default/launchctl%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>2013-02-28 12:00:00 +0800</pubDate>
+      <description>&lt;p&gt;{% include JB/setup %}&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;launchctl&lt;/code&gt;是Mac OS X中用来控制守护进程的一个工具。配合plist，可以达到启动、停止某服务的作用。&lt;/p&gt;
+
+&lt;p&gt;假设有一个com.example.foobar.plist文件，启动&lt;/p&gt;
+
+&lt;p&gt;{% highlight sh %}
+launchctl load com.example.foobar.plist
+launchctl unload com.example.foobar.plist
+{% endhighlight %}&lt;/p&gt;
+
+&lt;p&gt;比较遗憾的是没有reload功能。更加简单的理解就是linux下面的/etc/init.d/下面的内容。&lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>yum tips</title>
+      <link>http://fanan.github.io/default/yum-tips/</link>
+      <pubDate>2013-02-18 12:00:00 +0800</pubDate>
+      <description>&lt;p&gt;As we all know, Redhat Linux and its variants (CentOS, Fedora) use &lt;code&gt;yum&lt;/code&gt; as their default package manager. However, we cannot list the content of one rpm package only with the &lt;code&gt;yum&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;p&gt;One approach to solve the problem is download the rpm file and use&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;bash&#34;&gt;rpm -qlp rpm-file-name
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The disadvantage and inconveniece is obvious.&lt;/p&gt;
+
+&lt;p&gt;The best way is&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;bash&#34;&gt;yum install yum-utils
+repoquery -lq package-name
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    <item>
+      <title>Data mining with R notes: 1</title>
+      <link>http://fanan.github.io/default/Data-mining-with-R-notes--1/</link>
+      <pubDate>2012-12-27 12:00:00 +0800</pubDate>
+      <description>&lt;p&gt;{% include JB/setup %}&lt;/p&gt;
+
+&lt;p&gt;##Introduction&lt;/p&gt;
+
+&lt;p&gt;I am now reading &lt;code&gt;Data Mining With R&lt;/code&gt;, and I am taking notes. The original plot-system of the book is &lt;a href=&#34;http://lattice.r-forge.r-project.org&#34;&gt;lattice&lt;/a&gt;. However, I am going to replace it with &lt;a href=&#34;http://ggplot2.org&#34;&gt;ggplot2&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;##Predicting Algae Blooms&lt;/p&gt;
+
+&lt;p&gt;It is a classic prediction problem. 200 training data are given.&lt;/p&gt;
+
+&lt;p&gt;###Loading Data&lt;/p&gt;
+
+&lt;p&gt;{% highlight s %}
+library(ggplot2)
+library(DMwR)
+head(algae)
+{% endhighlight %}&lt;/p&gt;
+
+&lt;p&gt;the results are shown below&lt;/p&gt;
+
+&lt;p&gt;{% highlight s %}
+season  size  speed mxPH mnO2     Cl    NO3     NH4    oPO4     PO4 Chla   a1   a2   a3  a4   a5   a6  a7
+1 winter small medium 8.00  9.8 60.800  6.238 578.000 105.000 170.000 50.0  0.0  0.0  0.0 0.0 34.2  8.3 0.0
+2 spring small medium 8.35  8.0 57.750  1.288 370.000 428.750 558.750  1.3  1.4  7.6  4.8 1.9  6.7  0.0 2.1
+3 autumn small medium 8.10 11.4 40.020  5.330 346.667 125.667 187.057 15.6  3.3 53.6  1.9 0.0  0.0  0.0 9.7
+4 spring small medium 8.07  4.8 77.364  2.302  98.182  61.182 138.700  1.4  3.1 41.0 18.9 0.0  1.4  0.0 1.4
+5 autumn small medium 8.06  9.0 55.350 10.416 233.700  58.222  97.580 10.5  9.2  2.9  7.5 0.0  7.5  4.1 1.0
+6 winter small   high 8.25 13.1 65.750  9.248 430.000  18.250  56.667 28.4 15.1 14.6  1.4 0.0 22.5 12.6 2.9
+{% endhighlight %}&lt;/p&gt;
+
+&lt;p&gt;###Visualization&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;ggplot2&lt;/code&gt; is a handful plotting tool. The only disadvantage is that it support 2D plotting only.&lt;/p&gt;
+
+&lt;p&gt;Show the boxplot of &lt;code&gt;size&lt;/code&gt; and &lt;code&gt;a1&lt;/code&gt;:
+{% highlight s %}
+qplot(size, a1, geom=&amp;lsquo;boxplot&amp;rsquo;)
+{% endhighlight %}&lt;/p&gt;
+
+&lt;p&gt;Show the histogram of &lt;code&gt;mxPH&lt;/code&gt;:
+{% highlight s %}
+qplot(mxPH, data=algae, geom=&amp;lsquo;histogram&amp;rsquo;, binwidth=0.4)
+{% endhighlight %}&lt;/p&gt;
+
+&lt;p&gt;###Handle unknown values&lt;/p&gt;
+
+&lt;p&gt;Usually, there 4 ways to handle the unknowns.&lt;/p&gt;
+
+&lt;p&gt;1.Remove the cases withs unkowns.
+2.Fill in the unknown values by exploring the correlations between variables.
+3.Fill in the unknown values by exploring the similarity between cases.
+4.Use tools that are able to handle these values.&lt;/p&gt;
+
+&lt;p&gt;####remove unknown values
+the &lt;code&gt;complete.cases()&lt;/code&gt; function will tell whether a case is complete or not.
+{% highlight s %}
+complete.cases(algae) #a boolean vector
+algae.complete = algae[complete.cases(algae),] #because algae is a data frame
+nrow(algae.complete) #184
+{% endhighlight %}&lt;/p&gt;
+
+&lt;p&gt;Or, we can simply omit the NAs with one line:
+{% highlight s %}
+algae.complete = na.omit(algae)
+{% endhighlight %}&lt;/p&gt;
+
+&lt;p&gt;Sometimes, it is useful to find out how many NAs there are in one row. R supports anonymous function, so we can do
+{% highlight s %}
+apply(algae, 1, function(x) sum(is.na(x)))
+{% endhighlight %}&lt;/p&gt;
+
+&lt;p&gt;####fill in the unknowns with the most frequent values
+Mean, Median, and Mode are 3 ways to fill in the blanks. We should decide which one to use by the shape of its distribution. For example. the normal distribution is symetric and the obseravtions are clustered around the mean, thus, the Mean statistic is a good choice. For skewed distribution, or there are some obvious outliers in the sample, the mean may be incorrect. So the median may be a better choice.&lt;/p&gt;
+
+&lt;p&gt;Caculate the mean of the mxPH, removing the unknowns.
+{% highlight s %}
+mxPH.mean = mean(algae$mxPH, na.rm = TRUE)
+{% endhighlight %}&lt;/p&gt;
+
+&lt;p&gt;Fill the blanks:
+{% highlight s %}
+algae[is.na(algae$mxPH), &amp;ldquo;mxPH&amp;rdquo;] = mean(algae$mxPH, na.rm = TRUE)
+algae[is.na(algae$Chla), &amp;ldquo;Chla&amp;rdquo;] = median(algae$Chla, na.rm = TRUE)
+{% endhighlight %}&lt;/p&gt;
+
+&lt;p&gt;####fill in the unknowns by exploring correlations
+To obtain the variables correlation we can issue the command:
+{% highlight s %}
+cor(algae[, 4:18], use = &amp;ldquo;complete.obs&amp;rdquo;)
+{% endhighlight %}&lt;/p&gt;
+
+&lt;p&gt;This gives us a numerical matrix which may be difficult to get the correlation whose absolute value is close to 1. So
+{% highlight s %}
+symnum(cor(algae[,4:18], use = &amp;ldquo;complete.obs&amp;rdquo;))
+{% endhighlight %}&lt;/p&gt;
+
+&lt;p&gt;In our data, the correlations are in most cases irrelevant. However, there are two exceptions: between variables NH4 and NO3, and between PO4 and oPO4. These two latter variables are strongly correlated (above 0.9). The correlation between NH4 and NO3 is less evident (0.72) and thus it is risky to take advantage of it to fill in the unknowns.&lt;/p&gt;
+
+&lt;p&gt;We could do a linear regression.&lt;/p&gt;
+
+&lt;p&gt;{% highlight s %}
+lm(PO4 ~ oPO4, data=algae)
+{% endhighlight %}&lt;/p&gt;
+
+&lt;p&gt;We get the coefficients, &lt;code&gt;a=1.293, b=42.897&lt;/code&gt;, so fill in the blank:
+{% highlight s %}
+algae[28, &amp;ldquo;PO4&amp;rdquo;] = 42.897 + 1.293 * algae[28, &amp;ldquo;oPO4&amp;rdquo;]
+{% endhighlight %}&lt;/p&gt;
+
+&lt;p&gt;####filling in the unknown values by exploring similarities between cases&lt;/p&gt;
+
+&lt;p&gt;Instead of exploring the correlation between the columns (variables) of a dataset, we can try to use the similarities between the rows (observations) to fill in the unknown values.&lt;/p&gt;
+
+&lt;p&gt;First, we define a metric, the Euclidean norm is mostly used. Then, we find the &lt;code&gt;k&lt;/code&gt; most nearest point to the point which has NA. The weight is caculated by the Gaussion kernel function &lt;code&gt;w(d) = e^{-d}&lt;/code&gt;. For nominal variables, the distance is 1 if they are not equal, otherwise it is set to 0. These distances are caculated after normalizing the numeric values.&lt;/p&gt;
+
+&lt;p&gt;{% highlight s %}
+knnImputation = function (data, k = 10, scale = T, meth = &amp;ldquo;weighAvg&amp;rdquo;, distData = NULL)
+{
+    n &amp;lt;- nrow(data)
+    if (!is.null(distData)) {
+        distInit &amp;lt;- n + 1
+        data &amp;lt;- rbind(data, distData)
+    }
+    else distInit &amp;lt;- 1
+    N &amp;lt;- nrow(data)
+    ncol &amp;lt;- ncol(data)
+    nomAttrs &amp;lt;- rep(F, ncol)
+    for (i in seq(ncol)) nomAttrs[i] &amp;lt;- is.factor(data[, i])
+    nomAttrs &amp;lt;- which(nomAttrs)
+    hasNom &amp;lt;- length(nomAttrs)
+    contAttrs &amp;lt;- setdiff(seq(ncol), nomAttrs)
+    dm &amp;lt;- data
+    if (scale)
+        dm[, contAttrs] &amp;lt;- scale(dm[, contAttrs])
+    if (hasNom)
+        for (i in nomAttrs) dm[, i] &amp;lt;- as.integer(dm[, i])
+    dm &amp;lt;- as.matrix(dm)
+    nas &amp;lt;- which(!complete.cases(dm))
+    if (!is.null(distData))
+        tgt.nas &amp;lt;- nas[nas &amp;lt;= n]
+    else tgt.nas &amp;lt;- nas
+    if (length(tgt.nas) == 0)
+        warning(&amp;ldquo;No case has missing values. Stopping as there is nothing to do.&amp;rdquo;)
+    xcomplete &amp;lt;- dm[setdiff(distInit:N, nas), ]
+    if (nrow(xcomplete) &amp;lt; k)
+        stop(&amp;ldquo;Not sufficient complete cases for computing neighbors.&amp;rdquo;)
+    for (i in tgt.nas) {
+        tgtAs &amp;lt;- which(is.na(dm[i, ]))
+        dist &amp;lt;- scale(xcomplete, dm[i, ], FALSE)
+        xnom &amp;lt;- setdiff(nomAttrs, tgtAs)
+        if (length(xnom))
+            dist[, xnom] &amp;lt;- ifelse(dist[, xnom] &amp;gt; 0, 1, dist[,
+                xnom])
+        dist &amp;lt;- dist[, -tgtAs]
+        dist &amp;lt;- sqrt(drop(dist^2 %*% rep(1, ncol(dist))))
+        ks &amp;lt;- order(dist)[seq(k)]
+        for (j in tgtAs) if (meth == &amp;ldquo;median&amp;rdquo;)
+            data[i, j] &amp;lt;- centralValue(data[setdiff(distInit:N,
+                nas), j][ks])
+        else data[i, j] &amp;lt;- centralValue(data[setdiff(distInit:N,
+            nas), j][ks], exp(-dist[ks]))
+    }
+    data[1:n, ]
+}&lt;/p&gt;
+
+&lt;p&gt;clean.algae = knnImputation(algae, k=10)
+{% endhighlight %}&lt;/p&gt;
+
+&lt;p&gt;###linear model
+{% highlight s %}
+lm.a1 = lm(a1 ~ ., data = clean.algae[, 1:12])
+summary(lm.a1)
+plot(lm.a1)
+anova(lm.a1)
+final.lm.a1 = step(lm.a1)
+{% endhighlight %}&lt;/p&gt;
+
+&lt;p&gt;For nominal variables, R will create auxiliaray variables. For example, the &lt;code&gt;season&lt;/code&gt; variable, R will create &lt;code&gt;seasonspring&lt;/code&gt;, &lt;code&gt;seasonsummer&lt;/code&gt; and &lt;code&gt;seasonwinter&lt;/code&gt;, if all these variables are 0, then the value of season is &lt;code&gt;autumn&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;With the result, we could see the R-square is only 0.32, which indicates that the linear model does not fit the data well.&lt;/p&gt;
+
+&lt;p&gt;###regression tree
+Use a regression tree model.
+{% highlight s %}
+library(rpart)
+rt.a1 = rpart(a1 ~ ., data=algae[,1:12])
+plot(rt.a1)
+text(rt.a1)
+summary(rt.a1)
+{% endhighlight %}&lt;/p&gt;
+
+&lt;p&gt;###evaluation of model and selection
+todo&lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>R plot 1</title>
+      <link>http://fanan.github.io/default/R-plot-1/</link>
+      <pubDate>2012-12-14 12:00:00 +0800</pubDate>
+      <description>&lt;p&gt;绘图功能是&lt;code&gt;R&lt;/code&gt;的杀手锏。和一些&lt;strong&gt;&lt;em&gt;下拉框&lt;/em&gt;&lt;/strong&gt;式的统计软件不同，R的绘图需要自己动手。&lt;/p&gt;
+
+&lt;p&gt;网络上关于R的绘图的文章已有成千上万，在此将自己日常工作要用到的一些绘图功能做一记录。&lt;/p&gt;
+
+&lt;p&gt;首先是最简单的在&lt;code&gt;quartz&lt;/code&gt;或者&lt;code&gt;X11&lt;/code&gt;下作图。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;r&#34;&gt;x &amp;lt;- c(1:10, 10:1)
+plot(x, type = &amp;quot;p&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;将图保存到pdf文件中。（保存为jpeg、png等格式的方法类似）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;r&#34;&gt;pdf(&amp;quot;pdf_filename.pdf&amp;quot;)
+x &amp;lt;- c(1:10, 10:1)
+plot(x, type = &amp;quot;n&amp;quot;)
+lines(1:length(x), x)
+dev.off()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;使用渐变色作图&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;r&#34;&gt;svg(&amp;quot;output.svg&amp;quot;, width=10)
+#png(&amp;quot;1.png&amp;quot;)
+df = read.table(&amp;quot;system_monitor.log&amp;quot;)
+loadavg = df$V2
+timeFormat = &amp;quot;%Y-%m-%D-%H:%M:%S&amp;quot;
+times = as.POSIXct(strptime(df$V1, timeFormat))
+n = length(loadavg)
+idx = as.integer(1:100 * (n * 0.01))
+y = c(min(loadavg), loadavg, min(loadavg))
+x = c(1,1:n,n)
+plot(x, y, type=&amp;quot;n&amp;quot;, xlab=&amp;quot;Seconds&amp;quot;, ylab=&amp;quot;load average&amp;quot;, panel.first=grid(), xaxt = &amp;quot;n&amp;quot;)
+for (i in seq(255, 0, -3)) {
+    #yy = c(0, ((loadavg - min(loadavg)) * (1 - i / 255)), 0)
+    yy = y - (y - min(loadavg)) * (1 - i / 255)
+    polygon(x, yy, col=rgb(1, i/255, 0), border=NA)
+}
+axis(1, at=x, labels=df$V1[x])
+dev.off()
+
+&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
   </channel>
