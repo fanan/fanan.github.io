@@ -86,16 +86,13 @@
 
 <div class="row">
   <div class="span8">
-    <p>{% include JB/setup %}</p>
-
-<p><code>launchctl</code>是Mac OS X中用来控制守护进程的一个工具。配合plist，可以达到启动、停止某服务的作用。</p>
+    <p><code>launchctl</code>是Mac OS X中用来控制守护进程的一个工具。配合plist，可以达到启动、停止某服务的作用。</p>
 
 <p>假设有一个com.example.foobar.plist文件，启动</p>
 
-<p>{% highlight sh %}
-launchctl load com.example.foobar.plist
+<pre><code class="bash">launchctl load com.example.foobar.plist
 launchctl unload com.example.foobar.plist
-{% endhighlight %}</p>
+</code></pre>
 
 <p>比较遗憾的是没有reload功能。更加简单的理解就是linux下面的/etc/init.d/下面的内容。</p>
 

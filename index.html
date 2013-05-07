@@ -106,17 +106,6 @@
 </div>
 
 <div class="post">
-  <h3 class="title"><a href="/Diary/Hello/">Hello</a> <span class="date">2013-04-29</span></h3>
-
-  <p>开始使用<code>Gor</code>来渲染<code>markdown</code>文件。</p>
-
-
-  <div class="more">
-    <a href="/Diary/Hello/" class="btn">read more..</a>
-  </div>
-</div>
-
-<div class="post">
   <h3 class="title"><a href="/go/go-lang-test/">go-lang-test</a> <span class="date">2013-04-29</span></h3>
 
   <h1>golang-snippet iconv</h1>
@@ -149,6 +138,17 @@ package main</p>
 </div>
 
 <div class="post">
+  <h3 class="title"><a href="/Diary/Hello/">Hello</a> <span class="date">2013-04-29</span></h3>
+
+  <p>开始使用<code>Gor</code>来渲染<code>markdown</code>文件。</p>
+
+
+  <div class="more">
+    <a href="/Diary/Hello/" class="btn">read more..</a>
+  </div>
+</div>
+
+<div class="post">
   <h3 class="title"><a href="/default/vim-delete-lines/">vim delete lines</a> <span class="date">2013-04-23</span></h3>
 
   <p>在<code>vim</code>中，删除某些特定pattern的行十分简单：</p>
@@ -170,16 +170,13 @@ package main</p>
 <div class="post">
   <h3 class="title"><a href="/default/launchctl%E4%BD%BF%E7%94%A8/">launchctl使用</a> <span class="date">2013-02-28</span></h3>
 
-  <p>{% include JB/setup %}</p>
-
-<p><code>launchctl</code>是Mac OS X中用来控制守护进程的一个工具。配合plist，可以达到启动、停止某服务的作用。</p>
+  <p><code>launchctl</code>是Mac OS X中用来控制守护进程的一个工具。配合plist，可以达到启动、停止某服务的作用。</p>
 
 <p>假设有一个com.example.foobar.plist文件，启动</p>
 
-<p>{% highlight sh %}
-launchctl load com.example.foobar.plist
+<pre><code class="bash">launchctl load com.example.foobar.plist
 launchctl unload com.example.foobar.plist
-{% endhighlight %}</p>
+</code></pre>
 
 <p>比较遗憾的是没有reload功能。更加简单的理解就是linux下面的/etc/init.d/下面的内容。</p>
 
@@ -216,25 +213,31 @@ repoquery -lq package-name
 <div class="post">
   <h3 class="title"><a href="/default/Data-mining-with-R-notes--1/">Data mining with R notes: 1</a> <span class="date">2012-12-27</span></h3>
 
-  <p>{% include JB/setup %}</p>
-
-<p>##Introduction</p>
+  <h2><a style="display: block;" name="introduction" href="#introduction"></a>Introduction</h2>
 
 <p>I am now reading <code>Data Mining With R</code>, and I am taking notes. The original plot-system of the book is <a href="http://lattice.r-forge.r-project.org">lattice</a>. However, I am going to replace it with <a href="http://ggplot2.org">ggplot2</a>.</p>
 
-<p>##Predicting Algae Blooms</p>
+<h2><a style="display: block;" name="predicting-algae-blooms" href="#predicting-algae-blooms"></a>Predicting Algae Blooms</h2>
 
 <p>It is a classic prediction problem. 200 training data are given.</p>
 
-<p>###Loading Data</p>
+<h3>Loading Data</h3>
 
-<p>{% highlight s %}
-library(ggplot2)
+<pre><code class="r">library(ggplot2)
 library(DMwR)
 head(algae)
-{% endhighlight %}</p>
+</code></pre>
 
 <p>the results are shown below</p>
+
+<pre><code class="r">season  size  speed mxPH mnO2     Cl    NO3     NH4    oPO4     PO4 Chla   a1   a2   a3  a4   a5   a6  a7
+1 winter small medium 8.00  9.8 60.800  6.238 578.000 105.000 170.000 50.0  0.0  0.0  0.0 0.0 34.2  8.3 0.0
+2 spring small medium 8.35  8.0 57.750  1.288 370.000 428.750 558.750  1.3  1.4  7.6  4.8 1.9  6.7  0.0 2.1
+3 autumn small medium 8.10 11.4 40.020  5.330 346.667 125.667 187.057 15.6  3.3 53.6  1.9 0.0  0.0  0.0 9.7
+4 spring small medium 8.07  4.8 77.364  2.302  98.182  61.182 138.700  1.4  3.1 41.0 18.9 0.0  1.4  0.0 1.4
+5 autumn small medium 8.06  9.0 55.350 10.416 233.700  58.222  97.580 10.5  9.2  2.9  7.5 0.0  7.5  4.1 1.0
+6 winter small   high 8.25 13.1 65.750  9.248 430.000  18.250  56.667 28.4 15.1 14.6  1.4 0.0 22.5 12.6 2.9
+</code></pre>
 
 
   <div class="more">
