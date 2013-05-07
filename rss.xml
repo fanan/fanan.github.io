@@ -3,7 +3,26 @@
   <channel>
     <title>One and Only</title>
     <link>http://fanan.github.io</link>
-    <pubDate>2013-04-29 12:57:11 +0800</pubDate>
+    <pubDate>2013-05-07 11:12:35 +0800</pubDate>
+    <item>
+      <title>svn tip 1</title>
+      <link>http://fanan.github.io/default/svn-tip-1/</link>
+      <pubDate>2013-05-07 12:00:00 +0800</pubDate>
+      <description>&lt;p&gt;&lt;code&gt;svn add&lt;/code&gt;有时候会误添加一些无用的文件，在&lt;code&gt;svn ci&lt;/code&gt;之前，可以通过&lt;code&gt;svn revert&lt;/code&gt;来回滚。&lt;/p&gt;
+
+&lt;p&gt;设置&lt;code&gt;svn:ignore&lt;/code&gt;属性的时候可以用下面的命令递归的设置，其中&lt;code&gt;ignore_patterns.txt&lt;/code&gt;文件配置相关信息。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;bash&#34;&gt;svn propset -R svn:ignore -F ./ignore_patterns.txt .
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    <item>
+      <title>Hello</title>
+      <link>http://fanan.github.io/Diary/Hello/</link>
+      <pubDate>2013-04-29 12:00:00 +0800</pubDate>
+      <description>&lt;p&gt;开始使用&lt;code&gt;Gor&lt;/code&gt;来渲染&lt;code&gt;markdown&lt;/code&gt;文件。&lt;/p&gt;
+</description>
+    </item>
     <item>
       <title>go-lang-test</title>
       <link>http://fanan.github.io/go/go-lang-test/</link>
@@ -64,13 +83,6 @@ func main() {
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Quite easy, isn&amp;rsquo;t it?&lt;/p&gt;
-</description>
-    </item>
-    <item>
-      <title>Hello</title>
-      <link>http://fanan.github.io/Diary/Hello/</link>
-      <pubDate>2013-04-29 12:00:00 +0800</pubDate>
-      <description>&lt;p&gt;开始使用&lt;code&gt;Gor&lt;/code&gt;来渲染&lt;code&gt;markdown&lt;/code&gt;文件。&lt;/p&gt;
 </description>
     </item>
     <item>

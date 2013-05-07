@@ -4,12 +4,17 @@
 		<loc>http://fanan.github.io/</loc>
 	</url>
 	<url>
-		<loc>http://fanan.github.io/go/go-lang-test/</loc>
-		<lastmod>2013-04-29</lastmod>
+		<loc>http://fanan.github.io/default/svn-tip-1/</loc>
+		<lastmod>2013-05-07</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 		<loc>http://fanan.github.io/Diary/Hello/</loc>
+		<lastmod>2013-04-29</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+		<loc>http://fanan.github.io/go/go-lang-test/</loc>
 		<lastmod>2013-04-29</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>

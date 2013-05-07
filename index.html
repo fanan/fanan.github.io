@@ -90,6 +90,33 @@
 
 
 <div class="post">
+  <h3 class="title"><a href="/default/svn-tip-1/">svn tip 1</a> <span class="date">2013-05-07</span></h3>
+
+  <p><code>svn add</code>有时候会误添加一些无用的文件，在<code>svn ci</code>之前，可以通过<code>svn revert</code>来回滚。</p>
+
+<p>设置<code>svn:ignore</code>属性的时候可以用下面的命令递归的设置，其中<code>ignore_patterns.txt</code>文件配置相关信息。</p>
+
+<pre><code class="bash">svn propset -R svn:ignore -F ./ignore_patterns.txt .
+</code></pre>
+
+
+  <div class="more">
+    <a href="/default/svn-tip-1/" class="btn">read more..</a>
+  </div>
+</div>
+
+<div class="post">
+  <h3 class="title"><a href="/Diary/Hello/">Hello</a> <span class="date">2013-04-29</span></h3>
+
+  <p>开始使用<code>Gor</code>来渲染<code>markdown</code>文件。</p>
+
+
+  <div class="more">
+    <a href="/Diary/Hello/" class="btn">read more..</a>
+  </div>
+</div>
+
+<div class="post">
   <h3 class="title"><a href="/go/go-lang-test/">go-lang-test</a> <span class="date">2013-04-29</span></h3>
 
   <h1>golang-snippet iconv</h1>
@@ -118,17 +145,6 @@ package main</p>
 
   <div class="more">
     <a href="/go/go-lang-test/" class="btn">read more..</a>
-  </div>
-</div>
-
-<div class="post">
-  <h3 class="title"><a href="/Diary/Hello/">Hello</a> <span class="date">2013-04-29</span></h3>
-
-  <p>开始使用<code>Gor</code>来渲染<code>markdown</code>文件。</p>
-
-
-  <div class="more">
-    <a href="/Diary/Hello/" class="btn">read more..</a>
   </div>
 </div>
 
