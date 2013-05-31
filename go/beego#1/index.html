@@ -88,19 +88,17 @@
 
 <p>在tornado中，controller有一个<code>write\_error</code>的方法，可以重置http code，并且写http body。beego默认提供的Abort只能自定义输出模板，并且返回值不是所需要的code。</p>
 
-<p>下面代码实现了类似功能
-</p>
+<p>下面代码实现了类似功能</p>
 
-<p>type BaseController struct {
+<pre><code class="golang">type BaseController struct {
     beego.Controller
-}</p>
+}
 
-<p>func (self *BaseController) WriteError(errCode int, errMsg string)  {
+func (self *BaseController) WriteError(errCode int, errMsg string)  {
     self.Ctx.Abort(errCode, errMsg)
     beego.Error(errMsg)
-}</p>
-
-<p></p>
+}
+</code></pre>
 
     <hr>
     <div class="pagination">

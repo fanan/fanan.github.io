@@ -2,12 +2,12 @@
 <rss version="2.0">  <channel>
     <title>One and Only</title>
     <link>http://fanan.github.io</link>
-    <pubDate>2013-05-31 12:44:39 +0800</pubDate>
+    <pubDate>2013-05-31 12:47:17 +0800</pubDate>
     <item>
       <title>beego#1</title>
       <link>http://fanan.github.io/go/beego%231/</link>
       <pubDate>2013-05-31 12:00:00 +0800</pubDate>
-      <description>&lt;h1&gt;&lt;a style=&#34;display: block;&#34; name=&#34;beego-write\_error&#34; href=&#34;#beego-write\_error&#34;&gt;&lt;/a&gt;beego write_error&lt;/h1&gt;&#xA;&#xA;&lt;p&gt;在tornado中，controller有一个&lt;code&gt;write\_error&lt;/code&gt;的方法，可以重置http code，并且写http body。beego默认提供的Abort只能自定义输出模板，并且返回值不是所需要的code。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;下面代码实现了类似功能&#xA;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;type BaseController struct {&#xA;    beego.Controller&#xA;}&lt;/p&gt;&#xA;&#xA;&lt;p&gt;func (self *BaseController) WriteError(errCode int, errMsg string)  {&#xA;    self.Ctx.Abort(errCode, errMsg)&#xA;    beego.Error(errMsg)&#xA;}&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;/p&gt;&#xA;</description>
+      <description>&lt;h1&gt;&lt;a style=&#34;display: block;&#34; name=&#34;beego-write\_error&#34; href=&#34;#beego-write\_error&#34;&gt;&lt;/a&gt;beego write_error&lt;/h1&gt;&#xA;&#xA;&lt;p&gt;在tornado中，controller有一个&lt;code&gt;write\_error&lt;/code&gt;的方法，可以重置http code，并且写http body。beego默认提供的Abort只能自定义输出模板，并且返回值不是所需要的code。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;下面代码实现了类似功能&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;golang&#34;&gt;type BaseController struct {&#xA;    beego.Controller&#xA;}&#xA;&#xA;func (self *BaseController) WriteError(errCode int, errMsg string)  {&#xA;    self.Ctx.Abort(errCode, errMsg)&#xA;    beego.Error(errMsg)&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
     </item>
     <item>
       <title>svn tip 1</title>
