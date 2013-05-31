@@ -2,12 +2,12 @@
 <rss version="2.0">  <channel>
     <title>One and Only</title>
     <link>http://fanan.github.io</link>
-    <pubDate>2013-05-31 12:43:05 +0800</pubDate>
+    <pubDate>2013-05-31 12:44:39 +0800</pubDate>
     <item>
       <title>beego#1</title>
       <link>http://fanan.github.io/go/beego%231/</link>
       <pubDate>2013-05-31 12:00:00 +0800</pubDate>
-      <description>&lt;h1&gt;&lt;a style=&#34;display: block;&#34; name=&#34;beego-write\_error&#34; href=&#34;#beego-write\_error&#34;&gt;&lt;/a&gt;beego write_error&lt;/h1&gt;&#xA;&#xA;&lt;p&gt;在tornado中，controller有一个&lt;code&gt;write\_error&lt;/code&gt;的方法，可以重置http code，并且写http body。beego默认提供的Abort只能自定义输出模板，并且返回值不是所需要的code。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;下面代码实现了类似功能&#xA;go&lt;/p&gt;&#xA;&#xA;&lt;p&gt;type BaseController struct {&#xA;    beego.Controller&#xA;}&lt;/p&gt;&#xA;&#xA;&lt;p&gt;func (self *BaseController) WriteError(errCode int, errMsg string)  {&#xA;    self.Ctx.Abort(errCode, errMsg)&#xA;    beego.Error(errMsg)&#xA;}&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;/p&gt;&#xA;</description>
+      <description>&lt;h1&gt;&lt;a style=&#34;display: block;&#34; name=&#34;beego-write\_error&#34; href=&#34;#beego-write\_error&#34;&gt;&lt;/a&gt;beego write_error&lt;/h1&gt;&#xA;&#xA;&lt;p&gt;在tornado中，controller有一个&lt;code&gt;write\_error&lt;/code&gt;的方法，可以重置http code，并且写http body。beego默认提供的Abort只能自定义输出模板，并且返回值不是所需要的code。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;下面代码实现了类似功能&#xA;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;type BaseController struct {&#xA;    beego.Controller&#xA;}&lt;/p&gt;&#xA;&#xA;&lt;p&gt;func (self *BaseController) WriteError(errCode int, errMsg string)  {&#xA;    self.Ctx.Abort(errCode, errMsg)&#xA;    beego.Error(errMsg)&#xA;}&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>svn tip 1</title>
@@ -16,16 +16,16 @@
       <description>&lt;p&gt;&lt;code&gt;svn add&lt;/code&gt;有时候会误添加一些无用的文件，在&lt;code&gt;svn ci&lt;/code&gt;之前，可以通过&lt;code&gt;svn revert&lt;/code&gt;来回滚。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;设置&lt;code&gt;svn:ignore&lt;/code&gt;属性的时候可以用下面的命令递归的设置，其中&lt;code&gt;ignore_patterns.txt&lt;/code&gt;文件配置相关信息。&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;bash&#34;&gt;svn propset -R svn:ignore -F ./ignore_patterns.txt .&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;</description>
     </item>
     <item>
-      <title>go-lang-test</title>
-      <link>http://fanan.github.io/go/go-lang-test/</link>
-      <pubDate>2013-04-29 12:00:00 +0800</pubDate>
-      <description>&lt;h1&gt;golang-snippet iconv&lt;/h1&gt;&#xA;&#xA;&lt;p&gt;To use &lt;code&gt;libiconv&lt;/code&gt;, we could use the &lt;code&gt;mahonia&lt;/code&gt; package from &lt;a href=&#34;https://code.google.com/p/mahonia&#34;&gt;https://code.google.com/p/mahonia&lt;/a&gt;.&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;&lt;a style=&#34;display: block;&#34; name=&#34;install&#34; href=&#34;#install&#34;&gt;&lt;/a&gt;install&lt;/h2&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;go get -u code.google.com/p/mahonia&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;h2&gt;&lt;a style=&#34;display: block;&#34; name=&#34;example&#34; href=&#34;#example&#34;&gt;&lt;/a&gt;example&lt;/h2&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;go&#34;&gt;package main&#xA;&#xA;import (&#xA;    &amp;quot;bufio&amp;quot;&#xA;    &amp;quot;fmt&amp;quot;&#xA;    &amp;quot;io&amp;quot;&#xA;    &amp;quot;log&amp;quot;&#xA;    &amp;quot;mahonia&amp;quot;&#xA;    &amp;quot;os&amp;quot;&#xA;)&#xA;&#xA;var filename = &amp;quot;/Users/fatman/workspace/scripts/cup/acl/test_data/cvsmain2/CVSROOT/modules&amp;quot;&#xA;&#xA;func checkError(err interface{}) {&#xA;    if err != nil {&#xA;        log.Fatal(err)&#xA;    }&#xA;}&#xA;&#xA;func main() {&#xA;    f, err := os.Open(filename)&#xA;    checkError(err)&#xA;    defer f.Close()&#xA;    decoder := mahonia.NewDecoder(&amp;quot;gb18030&amp;quot;)&#xA;    r := bufio.NewReader(decoder.NewReader(f))&#xA;    //p := make([]byte, 1&amp;lt;&amp;lt;16)&#xA;    //n, err1 := r.Read(p)&#xA;    //checkError(err1)&#xA;    //fmt.Println(n)&#xA;    //fmt.Println(string(p))&#xA;    for {&#xA;        s, err := r.ReadString(&#39;\n&#39;)&#xA;        if err != nil {&#xA;            if err == io.EOF {&#xA;                break&#xA;            } else {&#xA;                log.Fatal(err)&#xA;            }&#xA;        }&#xA;        fmt.Print(s)&#xA;    }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;Quite easy, isn&amp;rsquo;t it?&lt;/p&gt;&#xA;</description>
-    </item>
-    <item>
       <title>Hello</title>
       <link>http://fanan.github.io/Diary/Hello/</link>
       <pubDate>2013-04-29 12:00:00 +0800</pubDate>
       <description>&lt;p&gt;开始使用&lt;code&gt;Gor&lt;/code&gt;来渲染&lt;code&gt;markdown&lt;/code&gt;文件。&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>go-lang-test</title>
+      <link>http://fanan.github.io/go/go-lang-test/</link>
+      <pubDate>2013-04-29 12:00:00 +0800</pubDate>
+      <description>&lt;h1&gt;golang-snippet iconv&lt;/h1&gt;&#xA;&#xA;&lt;p&gt;To use &lt;code&gt;libiconv&lt;/code&gt;, we could use the &lt;code&gt;mahonia&lt;/code&gt; package from &lt;a href=&#34;https://code.google.com/p/mahonia&#34;&gt;https://code.google.com/p/mahonia&lt;/a&gt;.&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;&lt;a style=&#34;display: block;&#34; name=&#34;install&#34; href=&#34;#install&#34;&gt;&lt;/a&gt;install&lt;/h2&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;go get -u code.google.com/p/mahonia&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;h2&gt;&lt;a style=&#34;display: block;&#34; name=&#34;example&#34; href=&#34;#example&#34;&gt;&lt;/a&gt;example&lt;/h2&gt;&#xA;&#xA;&lt;pre&gt;&lt;code class=&#34;go&#34;&gt;package main&#xA;&#xA;import (&#xA;    &amp;quot;bufio&amp;quot;&#xA;    &amp;quot;fmt&amp;quot;&#xA;    &amp;quot;io&amp;quot;&#xA;    &amp;quot;log&amp;quot;&#xA;    &amp;quot;mahonia&amp;quot;&#xA;    &amp;quot;os&amp;quot;&#xA;)&#xA;&#xA;var filename = &amp;quot;/Users/fatman/workspace/scripts/cup/acl/test_data/cvsmain2/CVSROOT/modules&amp;quot;&#xA;&#xA;func checkError(err interface{}) {&#xA;    if err != nil {&#xA;        log.Fatal(err)&#xA;    }&#xA;}&#xA;&#xA;func main() {&#xA;    f, err := os.Open(filename)&#xA;    checkError(err)&#xA;    defer f.Close()&#xA;    decoder := mahonia.NewDecoder(&amp;quot;gb18030&amp;quot;)&#xA;    r := bufio.NewReader(decoder.NewReader(f))&#xA;    //p := make([]byte, 1&amp;lt;&amp;lt;16)&#xA;    //n, err1 := r.Read(p)&#xA;    //checkError(err1)&#xA;    //fmt.Println(n)&#xA;    //fmt.Println(string(p))&#xA;    for {&#xA;        s, err := r.ReadString(&#39;\n&#39;)&#xA;        if err != nil {&#xA;            if err == io.EOF {&#xA;                break&#xA;            } else {&#xA;                log.Fatal(err)&#xA;            }&#xA;        }&#xA;        fmt.Print(s)&#xA;    }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;Quite easy, isn&amp;rsquo;t it?&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>vim delete lines</title>
