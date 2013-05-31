@@ -90,6 +90,33 @@
 
 
 <div class="post">
+  <h3 class="title"><a href="/go/beego%231/">beego#1</a> <span class="date">2013-05-31</span></h3>
+
+  <h1><a style="display: block;" name="beego-write\_error" href="#beego-write\_error"></a>beego write_error</h1>
+
+<p>在tornado中，controller有一个<code>write\_error</code>的方法，可以重置http code，并且写http body。beego默认提供的Abort只能自定义输出模板，并且返回值不是所需要的code。</p>
+
+<p>下面代码实现了类似功能
+go</p>
+
+<p>type BaseController struct {
+    beego.Controller
+}</p>
+
+<p>func (self *BaseController) WriteError(errCode int, errMsg string)  {
+    self.Ctx.Abort(errCode, errMsg)
+    beego.Error(errMsg)
+}</p>
+
+<p></p>
+
+
+  <div class="more">
+    <a href="/go/beego%231/" class="btn">read more..</a>
+  </div>
+</div>
+
+<div class="post">
   <h3 class="title"><a href="/default/svn-tip-1/">svn tip 1</a> <span class="date">2013-05-07</span></h3>
 
   <p><code>svn add</code>有时候会误添加一些无用的文件，在<code>svn ci</code>之前，可以通过<code>svn revert</code>来回滚。</p>

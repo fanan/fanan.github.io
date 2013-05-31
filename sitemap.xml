@@ -4,6 +4,11 @@
 		<loc>http://fanan.github.io/</loc>
 	</url>
 	<url>
+		<loc>http://fanan.github.io/go/beego%231/</loc>
+		<lastmod>2013-05-31</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
 		<loc>http://fanan.github.io/default/svn-tip-1/</loc>
 		<lastmod>2013-05-07</lastmod>
 		<changefreq>weekly</changefreq>
