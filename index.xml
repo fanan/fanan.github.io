@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>幸福胖胖</title>
+    <link>http://fanan.github.io/</link>
+    <description>Recent content on 幸福胖胖</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 18 Oct 2017 14:25:09 +0800</lastBuildDate>
+    
+	<atom:link href="http://fanan.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Game</title>
+      <link>http://fanan.github.io/game/</link>
+      <pubDate>Wed, 18 Oct 2017 14:25:09 +0800</pubDate>
+      
+      <guid>http://fanan.github.io/game/</guid>
+      <description>some web games sudoku sudoku</description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>http://fanan.github.io/about/</link>
+      <pubDate>Wed, 18 Oct 2017 13:53:22 +0800</pubDate>
+      
+      <guid>http://fanan.github.io/about/</guid>
+      <description>Nothing to say 我是一个胖胖</description>
+    </item>
+    
+  </channel>
+</rss>
