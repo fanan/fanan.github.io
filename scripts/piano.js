@@ -1218,10 +1218,8 @@ function $p_Ldemo_Main$__createKey__T__I__D__Lorg_scalajs_dom_HTMLDivElement($th
   dict$2.frequency = value$1;
   labelElement.innerHTML = (((note + "<sub>") + octave) + "</sub>");
   keyElement.appendChild(labelElement);
-  keyElement.addEventListener("mousedown", $thiz.Ldemo_Main$__f_notePressed, false);
-  keyElement.addEventListener("mouseup", $thiz.Ldemo_Main$__f_noteReleased, false);
-  keyElement.addEventListener("mouseover", $thiz.Ldemo_Main$__f_notePressed, false);
-  keyElement.addEventListener("mouseleave", $thiz.Ldemo_Main$__f_noteReleased, false);
+  keyElement.addEventListener("pointerdown", $thiz.Ldemo_Main$__f_notePressed, false);
+  keyElement.addEventListener("pointerup", $thiz.Ldemo_Main$__f_noteReleased, false);
   return keyElement
 }
 /** @constructor */
@@ -1253,8 +1251,8 @@ function $c_Ldemo_Main$() {
   this.Ldemo_Main$__f_changeVolume = ((arg1$2) => {
     $m_Ldemo_Main$().demo$Main$$$anonfun$changeVolume$1__Lorg_scalajs_dom_Event__V(arg1$2)
   });
-  this.Ldemo_Main$__f_notePressed = ((arg1$2$1) => $m_Ldemo_Main$().demo$Main$$$anonfun$notePressed$1__Lorg_scalajs_dom_MouseEvent__O(arg1$2$1));
-  this.Ldemo_Main$__f_noteReleased = ((arg1$2$2) => $m_Ldemo_Main$().demo$Main$$$anonfun$noteReleased$1__Lorg_scalajs_dom_MouseEvent__O(arg1$2$2));
+  this.Ldemo_Main$__f_notePressed = ((arg1$2$1) => $m_Ldemo_Main$().demo$Main$$$anonfun$notePressed$1__Lorg_scalajs_dom_PointerEvent__O(arg1$2$1));
+  this.Ldemo_Main$__f_noteReleased = ((arg1$2$2) => $m_Ldemo_Main$().demo$Main$$$anonfun$noteReleased$1__Lorg_scalajs_dom_PointerEvent__O(arg1$2$2));
   this.Ldemo_Main$__f_draw = ((arg1$2$3) => {
     var arg1 = $uD(arg1$2$3);
     $m_Ldemo_Main$().demo$Main$$$anonfun$draw$1__D__V(arg1)
@@ -1272,7 +1270,7 @@ $c_Ldemo_Main$.prototype.demo$Main$$$anonfun$changeVolume$1__Lorg_scalajs_dom_Ev
   var x = $as_T($m_Ldemo_Main$().Ldemo_Main$__f_volumeController.value);
   $$x1.value = $m_jl_Double$().parseDouble__T__D(x)
 });
-$c_Ldemo_Main$.prototype.demo$Main$$$anonfun$notePressed$1__Lorg_scalajs_dom_MouseEvent__O = (function(event) {
+$c_Ldemo_Main$.prototype.demo$Main$$$anonfun$notePressed$1__Lorg_scalajs_dom_PointerEvent__O = (function(event) {
   if (((1 & $uI(event.buttons)) !== 0)) {
     var dataset = event.target.dataset;
     if ((!$uZ($m_sjs_js_WrappedDictionary$Cache$().sjs_js_WrappedDictionary$Cache$__f_safeHasOwnProperty.call(dataset, "pressed")))) {
@@ -1302,7 +1300,7 @@ $c_Ldemo_Main$.prototype.demo$Main$$$anonfun$notePressed$1__Lorg_scalajs_dom_Mou
     return (void 0)
   }
 });
-$c_Ldemo_Main$.prototype.demo$Main$$$anonfun$noteReleased$1__Lorg_scalajs_dom_MouseEvent__O = (function(event) {
+$c_Ldemo_Main$.prototype.demo$Main$$$anonfun$noteReleased$1__Lorg_scalajs_dom_PointerEvent__O = (function(event) {
   var dataset = event.target.dataset;
   if (((dataset !== null) && $uZ($m_sjs_js_WrappedDictionary$Cache$().sjs_js_WrappedDictionary$Cache$__f_safeHasOwnProperty.call(dataset, "pressed")))) {
     if ((!$uZ($m_sjs_js_WrappedDictionary$Cache$().sjs_js_WrappedDictionary$Cache$__f_safeHasOwnProperty.call(dataset, "octave")))) {
