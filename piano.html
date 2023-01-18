@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>钢琴模拟</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="css/piano.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="keyboard"></div>
+    </div>
+    <div class="settingsBar">
+      <div class="left">
+        <span>音量: </span>
+        <input
+          type="range"
+          min="0.0"
+          max="1.0"
+          step="0.01"
+          value="0.5"
+          list="volumes"
+          name="volume"
+        />
+        <datalist id="volumes">
+          <option value="0.0" label="Mute"></option>
+          <option value="1.0" label="100%"></option>
+        </datalist>
+      </div>
+      <div class="right">
+        <span>波形: </span>
+        <select name="waveform">
+          <option value="sine">正弦</option>
+          <option value="square" selected>方波</option>
+          <option value="sawtooth">锯齿</option>
+          <option value="triangle">三角</option>
+          <!-- <option value="custom">Custom</option> -->
+        </select>
+      </div>
+    </div>
+
+    <div>
+      <canvas
+        id="oscilloscope"
+        class="visualizer"
+        width="640"
+        height="100"
+      ></canvas>
+    </div>
+    <script src="js/piano.js"></script>
+  </body>
+</html>
